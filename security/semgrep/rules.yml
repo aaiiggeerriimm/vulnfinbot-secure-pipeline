@@ -1,0 +1,28 @@
+rules:
+  - id: python-no-eval
+    patterns:
+      - pattern: eval(...)
+    message: "Avoid using eval() as it allows arbitrary code execution."
+    languages: [python]
+    severity: ERROR
+
+  - id: python-no-exec
+    patterns:
+      - pattern: exec(...)
+    message: "Avoid using exec() as it allows arbitrary code execution."
+    languages: [python]
+    severity: ERROR
+
+  - id: flask-debug-enabled
+    patterns:
+      - pattern: app.run(..., debug=True, ...)
+    message: "Flask debug mode must not be enabled in production."
+    languages: [python]
+    severity: WARNING
+
+  - id: hardcoded-secret-assignment
+    patterns:
+      - pattern-regex: '(SECRET|API_KEY|PASSWORD|TOKEN)\s*=\s*["''][^"'']+["'']'
+    message: "Potential hardcoded secret detected in source code."
+    languages: [python]
+    severity: WARNING
